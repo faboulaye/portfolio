@@ -11,9 +11,6 @@ description: >
 theme: jekyll-theme-cayman
 
 # Show these pages in the header (order matters)
-header_pages:
-  - articles.md
-  - projects.md
 
 baseurl: "/portfolio/"
 url: "https://faboulaye.github.io"
