@@ -1,18 +1,9 @@
 title: Firdaws Aboulaye's Portfolio
-description: >
-  Senior Cloud & Backend Engineer with 10+ years of experience designing and delivering
-  scalable backend systems and cloud-native SaaS platforms on AWS. Strong knowledge of
-  Kubernetes, serverless architecture, CI/CD, and Infrastructure as Code (Terraform, Helm).
-  Proven track record leading projects from conception to production with full observability
-  and monitoring. Skilled in backend development with Java, Typescript, and Python.
-  Experienced in operating SaaS solutions with a strong focus on reliability, cost-optimization,
-  and effective collaboration across SRE, product, and operations teams.
-
+description: Senior Cloud & Backend Engineer · Kubernetes · AWS · IaC
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme
 
-# Show these pages in the header (order matters)
 header_pages:
   - articles.md
   - projects.md
