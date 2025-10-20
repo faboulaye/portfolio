@@ -8,9 +8,8 @@ description: >
   Experienced in operating SaaS solutions with a strong focus on reliability, cost-optimization,
   and effective collaboration across SRE, product, and operations teams.
 
-remote_theme: pages-themes/cayman@v0.2.0
+theme: jekyll-theme-cayman
 plugins:
-  - jekyll-remote-theme
   - jekyll-feed
   - jekyll-seo-tag
 
