@@ -1,6 +1,5 @@
 ---
 layout: home
-title: "Firdaws Aboulaye – Senior Cloud Engineer"
 ---
 
 I’m a Senior Cloud & Backend Engineer focused on building **scalable, reliable, and secure** cloud-native platforms on **AWS** with **Kubernetes**, **Serverless**, and **IaC**.
