@@ -2,7 +2,14 @@ title: Firdaws Aboulaye's Portfolio
 author:
   name: Firdaws Aboulaye
   email: aboufred@gmail.com
-description: Senior Cloud Engineer
+description: >
+  Senior Cloud & Backend Engineer with 10+ years of experience designing and delivering
+  scalable backend systems and cloud-native SaaS platforms on AWS. Strong knowledge of
+  Kubernetes, serverless architecture, CI/CD, and Infrastructure as Code (Terraform, Helm).
+  Proven track record leading projects from conception to production with full observability
+  and monitoring. Skilled in backend development with Java, Typescript, and Python.
+  Experienced in operating SaaS solutions with a strong focus on reliability, cost-optimization,
+  and effective collaboration across SRE, product, and operations teams.
 
 theme: minima
 
@@ -30,7 +37,3 @@ minima:
     - title: "GitHub"
       url: "https://github.com/faboulaye"
       icon: github
-
-    - title: "Credly"
-      url: "https://www.credly.com/users/firdaws-aboulaye"
-      icon: credly
