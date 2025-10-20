@@ -13,14 +13,14 @@ minima:
 
   social_links:
     - title: "LinkedIn"
-      user_url: "https://www.linkedin.com/in/faboulaye"
+      url: "https://www.linkedin.com/in/faboulaye"
       icon: linkedin
     - title: "GitHub"
-      user_url: "https://github.com/faboulaye"
+      url: "https://github.com/faboulaye"
       icon: github
 
     - title: "Credly"
-      user_url: "https://www.credly.com/users/firdaws-aboulaye"
+      url: "https://www.credly.com/users/firdaws-aboulaye"
       icon: credly
 
 sass:
