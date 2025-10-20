@@ -1,11 +1,9 @@
 title: Firdaws Aboulaye's Portfolio
 description: Senior Cloud & Backend Engineer · Kubernetes · AWS · IaC
-remote_theme: pages-themes/cayman@v0.2.0
+theme: jekyll-theme-cayman
 plugins:
   - jekyll-remote-theme
 
 header_pages:
   - articles.md
   - projects.md
-
-url: https://faboulaye.github.io
