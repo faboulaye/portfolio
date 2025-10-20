@@ -1,6 +1,6 @@
 ---
 layout: page
 title: Articles
-permalink: /articles/
+permalink: {{ site.baseurl }}/articles/
 ---
 {% include_relative articles/README.md %}

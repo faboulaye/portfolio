@@ -16,4 +16,4 @@ I’m a Senior Cloud & Backend Engineer focused on building **scalable, reliable
 - Observability with CloudWatch, Prometheus, Grafana, Kibana, Lumigo, ELK.
 - Performance testing with Locust for SaaS readiness.
 
-> Want the details? Check **[Articles](/articles)** and **[Projects](/projects)**.
+> Want the details? Check **[Articles]({{ site.baseurl }}/articles)** and **[Projects]({{ site.baseurl }}/projects)**.
