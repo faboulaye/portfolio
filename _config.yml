@@ -1,7 +1,4 @@
 title: Firdaws Aboulaye's Portfolio
-author:
-  name: Firdaws Aboulaye
-  email: aboufred@gmail.com
 description: >
   Senior Cloud & Backend Engineer with 10+ years of experience designing and delivering
   scalable backend systems and cloud-native SaaS platforms on AWS. Strong knowledge of
@@ -11,29 +8,15 @@ description: >
   Experienced in operating SaaS solutions with a strong focus on reliability, cost-optimization,
   and effective collaboration across SRE, product, and operations teams.
 
-theme: minima
-
+remote_theme: pages-themes/cayman@v0.2.0
 plugins:
+  - jekyll-remote-theme
   - jekyll-feed
   - jekyll-seo-tag
 
-sass:
-  quiet_deps: true
-  silence_deprecations: [import]
+# Show these pages in the header (order matters)
+header_pages:
+  - articles.md
+  - projects.md
 
-minima:
-  skin: auto
-
-  nav_pages:
-    - articles.md
-    - projects.md
-
-  show_excerpts: false
-
-  social_links:
-    - title: "LinkedIn"
-      url: "https://www.linkedin.com/in/faboulaye"
-      icon: linkedin
-    - title: "GitHub"
-      url: "https://github.com/faboulaye"
-      icon: github
+url: https://faboulaye.github.io
