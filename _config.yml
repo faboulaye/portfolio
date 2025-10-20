@@ -3,13 +3,25 @@ author:
   name: Firdaws Aboulaye
   email: aboufred@gmail.com
 description: Senior Cloud Engineer
+
 theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+sass:
+  quiet_deps: true
+  silence_deprecations: [import]
 
 minima:
   skin: auto
+
   nav_pages:
     - articles.md
     - projects.md
+
+  show_excerpts: false
 
   social_links:
     - title: "LinkedIn"
@@ -22,9 +34,3 @@ minima:
     - title: "Credly"
       url: "https://www.credly.com/users/firdaws-aboulaye"
       icon: credly
-
-sass:
-  quiet_deps: true
-  silence_deprecations: [import]
-
-plugins: []
