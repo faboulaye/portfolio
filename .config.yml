@@ -1,0 +1,22 @@
+title: Firdaws Aboulaye
+description: Senior Cloud Engineer
+theme: minima
+
+# Pages shown in the top nav (order matters)
+header_pages:
+  - articles.md
+  - projects.md
+
+minima:
+  social_links:
+    - { platform: linkedin, user_url: "https://www.linkedin.com/in/faboulaye" }
+    - { platform: github, user_url: "https://github.com/faboulaye" }
+    - {
+        platform: credly,
+        user_url: "https://www.credly.com/users/firdaws-aboulaye",
+      }
+    - { platform: email, user_url: "mailto:aboufred@gmail.com" }
+
+# Optional: improve URLs and metadata
+url: https://faboulaye.github.io
+plugins: [] # keep default GitHub Pages plugins
