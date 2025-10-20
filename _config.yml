@@ -15,5 +15,5 @@ header_pages:
   - articles.md
   - projects.md
 
-baseurl: /portfolio
-url: https://faboulaye.github.io
+baseurl: "/portfolio/"
+url: "https://faboulaye.github.io"
