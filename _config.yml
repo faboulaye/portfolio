@@ -1,22 +1,32 @@
-title: Firdaws Aboulaye
+title: Firdaws Aboulaye,s Portfolio
+author:
+  name: Firdaws Aboulaye
+  email: aboufred@gmail.com
 description: Senior Cloud Engineer
-
-# Pages shown in the top nav (order matters)
-header_pages:
-  - articles.md
-  - projects.md
+theme: minima
 
 minima:
+  skin: auto
+  nav_pages:
+    - articles.md
+    - projects.md
   social_links:
-    - { platform: linkedin, user_url: "https://www.linkedin.com/in/faboulaye" }
-    - { platform: github, user_url: "https://github.com/faboulaye" }
     - {
-        platform: credly,
+        title: "LinkedIn",
+        user_url: "https://www.linkedin.com/in/faboulaye",
+        icon: linkedin,
+      }
+    - {
+        title: "GitHub",
+        user_url: "https://github.com/faboulaye",
+        icon: github,
+      }
+    - {
+        title: "Credly",
         user_url: "https://www.credly.com/users/firdaws-aboulaye",
       }
-    - { platform: email, user_url: "mailto:aboufred@gmail.com" }
 
 # Optional: improve URLs and metadata
 url: https://faboulaye.github.io
-theme: minima
+
 plugins: []
