@@ -10,10 +10,14 @@ description: >
 
 theme: jekyll-theme-cayman
 
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+  - jekyll-remote-theme
+
 # Show these pages in the header (order matters)
 header_pages:
   - articles.md
   - projects.md
 
-baseurl: "/portfolio/"
+baseurl: "/portfolio"
 url: "https://faboulaye.github.io"
