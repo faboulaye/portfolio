@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Github,
   Linkedin,
@@ -14,6 +14,7 @@ import {
   Clock,
   Menu,
   X,
+  Globe2,
 } from "lucide-react";
 
 import portfolioDataJson from "./portfolio.json";
@@ -92,8 +93,6 @@ interface PortfolioData {
   articles: Article[];
 }
 
-const portfolioData: PortfolioData = portfolioDataJson as PortfolioData;
-
 type SectionId =
   | "about"
   | "experience"
@@ -103,36 +102,97 @@ type SectionId =
   | "certifications"
   | "articles";
 
-interface Section {
-  id: SectionId;
-  label: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
+type Locale = "en" | "fr" | "de";
 
-const Portfolio: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<SectionId>("about");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const data = portfolioData;
+type Translation = {
+  nav: Record<SectionId, string>;
+  about: { title: string; email: string; phone: string; location: string };
+  experienceTitle: string;
+  projectsTitle: string;
+  skillsTitle: string;
+  educationTitle: string;
+  certificationsTitle: string;
+  articlesTitle: string;
+  featuredLabel: string;
+  allArticlesLabel: string;
+  footer: string;
+  presentLabel: string;
+  months: string[];
+  localeDate: string;
+};
 
-  const handleSectionChange = (sectionId: SectionId) => {
-    setActiveSection(sectionId);
-    setIsMobileMenuOpen(false); // Close mobile menu when section changes
-  };
+type PortfolioDataByLocale = Record<Locale, PortfolioData>;
 
-  const sections: Section[] = [
-    { id: "about", label: "À propos", icon: User },
-    { id: "experience", label: "Expérience", icon: Briefcase },
-    { id: "projects", label: "Projets", icon: Code2 },
-    { id: "articles", label: "Articles", icon: BookOpen },
-    { id: "skills", label: "Compétences", icon: Code2 },
-    { id: "education", label: "Formation", icon: GraduationCap },
-    { id: "certifications", label: "Certifications", icon: Award },
-  ];
-
-  const formatDate = (date: string): string => {
-    if (date === "Present") return "Présent";
-    const [year, month] = date.split("-");
-    const months = [
+const translations: Record<Locale, Translation> = {
+  en: {
+    nav: {
+      about: "About",
+      experience: "Experience",
+      projects: "Projects",
+      skills: "Skills",
+      education: "Education",
+      certifications: "Certifications",
+      articles: "Articles",
+    },
+    about: {
+      title: "About",
+      email: "Email",
+      phone: "Phone",
+      location: "Location",
+    },
+    experienceTitle: "Professional Experience",
+    projectsTitle: "Projects",
+    skillsTitle: "Skills",
+    educationTitle: "Education",
+    certificationsTitle: "Certifications",
+    articlesTitle: "Articles & Blog",
+    featuredLabel: "Featured Articles",
+    allArticlesLabel: "All articles",
+    footer: "All rights reserved.",
+    presentLabel: "Present",
+    months: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    localeDate: "en-US",
+  },
+  fr: {
+    nav: {
+      about: "À propos",
+      experience: "Expérience",
+      projects: "Projets",
+      skills: "Compétences",
+      education: "Formation",
+      certifications: "Certifications",
+      articles: "Articles",
+    },
+    about: {
+      title: "À propos",
+      email: "Email",
+      phone: "Téléphone",
+      location: "Localisation",
+    },
+    experienceTitle: "Expérience Professionnelle",
+    projectsTitle: "Projets",
+    skillsTitle: "Compétences",
+    educationTitle: "Formation",
+    certificationsTitle: "Certifications",
+    articlesTitle: "Articles & Blog",
+    featuredLabel: "Articles en vedette",
+    allArticlesLabel: "Tous les articles",
+    footer: "Tous droits réservés.",
+    presentLabel: "Présent",
+    months: [
       "Jan",
       "Fév",
       "Mar",
@@ -145,8 +205,173 @@ const Portfolio: React.FC = () => {
       "Oct",
       "Nov",
       "Déc",
-    ];
-    return `${months[parseInt(month) - 1]} ${year}`;
+    ],
+    localeDate: "fr-FR",
+  },
+  de: {
+    nav: {
+      about: "Über mich",
+      experience: "Berufserfahrung",
+      projects: "Projekte",
+      skills: "Kompetenzen",
+      education: "Ausbildung",
+      certifications: "Zertifizierungen",
+      articles: "Artikel",
+    },
+    about: {
+      title: "Über mich",
+      email: "E-Mail",
+      phone: "Telefon",
+      location: "Standort",
+    },
+    experienceTitle: "Berufserfahrung",
+    projectsTitle: "Projekte",
+    skillsTitle: "Kompetenzen",
+    educationTitle: "Ausbildung",
+    certificationsTitle: "Zertifizierungen",
+    articlesTitle: "Artikel & Blog",
+    featuredLabel: "Ausgewählte Artikel",
+    allArticlesLabel: "Alle Artikel",
+    footer: "Alle Rechte vorbehalten.",
+    presentLabel: "Aktuell",
+    months: [
+      "Jan",
+      "Feb",
+      "Mär",
+      "Apr",
+      "Mai",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Okt",
+      "Nov",
+      "Dez",
+    ],
+    localeDate: "de-DE",
+  },
+};
+
+const LOCALES: Locale[] = ["en", "fr", "de"];
+
+const portfolioDataByLocale = portfolioDataJson as PortfolioDataByLocale;
+
+interface Section {
+  id: SectionId;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const Portfolio: React.FC = () => {
+  const [locale, setLocale] = useState<Locale>("en");
+  const [activeSection, setActiveSection] = useState<SectionId>("about");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLocaleOpen, setIsLocaleOpen] = useState(false);
+  const sectionRefs = useRef<Record<SectionId, HTMLElement | null>>({
+    about: null,
+    experience: null,
+    projects: null,
+    skills: null,
+    education: null,
+    certifications: null,
+    articles: null,
+  });
+  const localeDesktopRef = useRef<HTMLDivElement | null>(null);
+  const localeMobileRef = useRef<HTMLDivElement | null>(null);
+  const data = portfolioDataByLocale[locale] ?? portfolioDataByLocale.en;
+  const t = translations[locale];
+
+  const scrollToSection = (sectionId: SectionId) => {
+    setActiveSection(sectionId);
+    setIsMobileMenuOpen(false); // Close mobile menu when section changes
+    setIsLocaleOpen(false);
+    const el = sectionRefs.current[sectionId];
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const handleLocaleChange = (value: Locale) => {
+    setLocale(value);
+    setIsMobileMenuOpen(false);
+    setIsLocaleOpen(false);
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) {
+          const id = visible[0].target.getAttribute(
+            "data-section-id"
+          ) as SectionId | null;
+          if (id) {
+            setActiveSection(id);
+          }
+        }
+      },
+      {
+        root: null,
+        rootMargin: "0px 0px -50% 0px", // consider midpoint of viewport
+        threshold: [0.25, 0.5, 0.75],
+      }
+    );
+
+    Object.values(sectionRefs.current).forEach((node) => {
+      if (node) observer.observe(node);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isLocaleOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (
+        (localeDesktopRef.current &&
+          localeDesktopRef.current.contains(target)) ||
+        (localeMobileRef.current && localeMobileRef.current.contains(target))
+      ) {
+        return;
+      }
+      setIsLocaleOpen(false);
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsLocaleOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isLocaleOpen]);
+
+  const sections: Section[] = [
+    { id: "about", label: t.nav.about, icon: User },
+    { id: "experience", label: t.nav.experience, icon: Briefcase },
+    { id: "projects", label: t.nav.projects, icon: Code2 },
+    { id: "articles", label: t.nav.articles, icon: BookOpen },
+    { id: "skills", label: t.nav.skills, icon: Code2 },
+    { id: "education", label: t.nav.education, icon: GraduationCap },
+    { id: "certifications", label: t.nav.certifications, icon: Award },
+  ];
+
+  const formatDate = (date: string): string => {
+    if (date === "Present") return t.presentLabel;
+    const [year, month] = date.split("-");
+    return `${t.months[parseInt(month) - 1]} ${year}`;
   };
 
   const formatArticleDate = (dateString: string): string => {
@@ -156,7 +381,7 @@ const Portfolio: React.FC = () => {
       month: "long",
       day: "numeric",
     };
-    return date.toLocaleDateString("fr-FR", options);
+    return date.toLocaleDateString(t.localeDate, options);
   };
 
   return (
@@ -164,47 +389,125 @@ const Portfolio: React.FC = () => {
       {/* Header */}
       <header className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-lg border-b border-white/10 z-50">
         <nav className="container mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-4">
             <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               {data.personal.name}
             </h1>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex gap-4 lg:gap-6">
-              {sections.map((section) => (
+            {/* Desktop Navigation + Locale */}
+            <div className="hidden md:flex items-center gap-4 lg:gap-6">
+              <div className="flex gap-3 lg:gap-4">
+                {sections.map((section) => (
+                  <button
+                    key={section.id}
+                    onClick={() => scrollToSection(section.id)}
+                    className={`px-3 lg:px-4 py-2 rounded-lg transition-all text-sm lg:text-base ${
+                      activeSection === section.id
+                        ? "bg-purple-600 text-white"
+                        : "text-gray-300 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    {section.label}
+                  </button>
+                ))}
+              </div>
+              <div className="relative" ref={localeDesktopRef}>
                 <button
-                  key={section.id}
-                  onClick={() => handleSectionChange(section.id)}
-                  className={`px-3 lg:px-4 py-2 rounded-lg transition-all text-sm lg:text-base ${
-                    activeSection === section.id
-                      ? "bg-purple-600 text-white"
-                      : "text-gray-300 hover:text-white hover:bg-white/5"
-                  }`}
+                  onClick={() => setIsLocaleOpen((prev) => !prev)}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition text-gray-200 hover:text-white hover:bg-white/5"
+                  aria-haspopup="listbox"
+                  aria-expanded={isLocaleOpen}
                 >
-                  {section.label}
+                  <Globe2 className="w-5 h-5" />
+                  <span className="font-semibold">{locale.toUpperCase()}</span>
                 </button>
-              ))}
+                {isLocaleOpen && (
+                  <div className="absolute right-0 mt-2 w-36 rounded-lg border border-white/10 bg-slate-900/90 backdrop-blur-lg shadow-lg z-50">
+                    <ul className="py-2">
+                      {LOCALES.map((loc) => (
+                        <li key={loc}>
+                          <button
+                            onClick={() => handleLocaleChange(loc)}
+                            className={`w-full text-left px-4 py-2 text-sm transition ${
+                              locale === loc
+                                ? "bg-purple-600 text-white"
+                                : "text-gray-200 hover:text-white hover:bg-white/5"
+                            }`}
+                            role="option"
+                            aria-selected={locale === loc}
+                          >
+                            {loc.toUpperCase()}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+            {/* Mobile Controls */}
+            <div className="md:hidden flex items-center gap-2">
+              <div className="relative" ref={localeMobileRef}>
+                <button
+                  onClick={() => {
+                    setIsLocaleOpen((prev) => !prev);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="flex items-center gap-1 px-3 py-2 text-gray-200 hover:text-white hover:bg-white/5 rounded-lg transition"
+                  aria-haspopup="listbox"
+                  aria-expanded={isLocaleOpen}
+                >
+                  <Globe2 className="w-5 h-5" />
+                  <span className="font-semibold text-sm">
+                    {locale.toUpperCase()}
+                  </span>
+                </button>
+                {isLocaleOpen && (
+                  <div className="absolute right-0 mt-2 w-32 rounded-lg border border-white/10 bg-slate-900/90 backdrop-blur-lg shadow-lg z-50">
+                    <ul className="py-2">
+                      {LOCALES.map((loc) => (
+                        <li key={loc}>
+                          <button
+                            onClick={() => handleLocaleChange(loc)}
+                            className={`w-full text-left px-4 py-2 text-sm transition ${
+                              locale === loc
+                                ? "bg-purple-600 text-white"
+                                : "text-gray-200 hover:text-white hover:bg-white/5"
+                            }`}
+                            role="option"
+                            aria-selected={locale === loc}
+                          >
+                            {loc.toUpperCase()}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(!isMobileMenuOpen);
+                  setIsLocaleOpen(false);
+                }}
+                className="p-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition"
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu */}
           <div
             className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
               isMobileMenuOpen
-                ? "max-h-96 opacity-100 mt-4"
+                ? "max-h-[28rem] opacity-100 mt-4"
                 : "max-h-0 opacity-0"
             }`}
           >
@@ -214,7 +517,7 @@ const Portfolio: React.FC = () => {
                 return (
                   <button
                     key={section.id}
-                    onClick={() => handleSectionChange(section.id)}
+                    onClick={() => scrollToSection(section.id)}
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-left ${
                       activeSection === section.id
                         ? "bg-purple-600 text-white"
@@ -226,6 +529,21 @@ const Portfolio: React.FC = () => {
                   </button>
                 );
               })}
+            </div>
+            <div className="flex items-center gap-2 pb-4 px-1">
+              {LOCALES.map((loc) => (
+                <button
+                  key={loc}
+                  onClick={() => handleLocaleChange(loc)}
+                  className={`flex-1 px-3 py-2 rounded-lg text-sm transition ${
+                    locale === loc
+                      ? "bg-white/10 text-white"
+                      : "text-gray-300 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  {loc.toUpperCase()}
+                </button>
+              ))}
             </div>
           </div>
         </nav>
@@ -265,32 +583,31 @@ const Portfolio: React.FC = () => {
               >
                 <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
               </a>
-              <a
-                href={`mailto:${data.personal.email}`}
-                className="p-2 sm:p-3 bg-white/10 rounded-lg hover:bg-white/20 transition"
-                aria-label="Email"
-              >
-                <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
             </div>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <main className="container mx-auto max-w-6xl px-4 sm:px-6 pb-24 sm:pb-32">
+      <main className="container mx-auto max-w-6xl px-4 sm:px-6 pb-24 sm:pb-32 space-y-10 sm:space-y-14">
         {/* About Section */}
-        {activeSection === "about" && (
+        <section
+          id="about"
+          data-section-id="about"
+          ref={(node) => (sectionRefs.current.about = node)}
+          className="scroll-mt-28"
+        >
           <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-4 sm:p-6 lg:p-8 border border-white/10">
             <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
-              <User className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400" />À propos
+              <User className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400" />
+              {t.about.title}
             </h3>
             <div className="space-y-4 text-gray-300">
               <p className="text-base sm:text-lg">{data.personal.summary}</p>
               <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 mt-4 sm:mt-6">
                 <div className="bg-white/5 p-3 sm:p-4 rounded-lg">
                   <span className="text-purple-400 font-semibold text-sm sm:text-base">
-                    Email:
+                    {t.about.email}:
                   </span>
                   <p className="text-sm sm:text-base break-all">
                     {data.personal.email}
@@ -298,13 +615,13 @@ const Portfolio: React.FC = () => {
                 </div>
                 <div className="bg-white/5 p-3 sm:p-4 rounded-lg">
                   <span className="text-purple-400 font-semibold text-sm sm:text-base">
-                    Téléphone:
+                    {t.about.phone}:
                   </span>
                   <p className="text-sm sm:text-base">{data.personal.phone}</p>
                 </div>
                 <div className="bg-white/5 p-3 sm:p-4 rounded-lg sm:col-span-2">
                   <span className="text-purple-400 font-semibold text-sm sm:text-base">
-                    Localisation:
+                    {t.about.location}:
                   </span>
                   <p className="text-sm sm:text-base">
                     {data.personal.location}
@@ -313,14 +630,19 @@ const Portfolio: React.FC = () => {
               </div>
             </div>
           </div>
-        )}
+        </section>
 
         {/* Experience Section */}
-        {activeSection === "experience" && (
+        <section
+          id="experience"
+          data-section-id="experience"
+          ref={(node) => (sectionRefs.current.experience = node)}
+          className="scroll-mt-28"
+        >
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
               <Briefcase className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400" />
-              Expérience Professionnelle
+              {t.experienceTitle}
             </h3>
             {data.experience.map((exp, idx) => (
               <div
@@ -360,14 +682,19 @@ const Portfolio: React.FC = () => {
               </div>
             ))}
           </div>
-        )}
+        </section>
 
         {/* Projects Section */}
-        {activeSection === "projects" && (
+        <section
+          id="projects"
+          data-section-id="projects"
+          ref={(node) => (sectionRefs.current.projects = node)}
+          className="scroll-mt-28"
+        >
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
               <Code2 className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400" />
-              Projets
+              {t.projectsTitle}
             </h3>
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
               {data.projects.map((project, idx) => (
@@ -411,14 +738,19 @@ const Portfolio: React.FC = () => {
               ))}
             </div>
           </div>
-        )}
+        </section>
 
         {/* Skills Section */}
-        {activeSection === "skills" && (
+        <section
+          id="skills"
+          data-section-id="skills"
+          ref={(node) => (sectionRefs.current.skills = node)}
+          className="scroll-mt-28"
+        >
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
               <Code2 className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400" />
-              Compétences
+              {t.skillsTitle}
             </h3>
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
               {data.skills.map((skillGroup, idx) => (
@@ -443,14 +775,19 @@ const Portfolio: React.FC = () => {
               ))}
             </div>
           </div>
-        )}
+        </section>
 
         {/* Education Section */}
-        {activeSection === "education" && (
+        <section
+          id="education"
+          data-section-id="education"
+          ref={(node) => (sectionRefs.current.education = node)}
+          className="scroll-mt-28"
+        >
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
               <GraduationCap className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400" />
-              Formation
+              {t.educationTitle}
             </h3>
             {data.education.map((edu, idx) => (
               <div
@@ -481,14 +818,19 @@ const Portfolio: React.FC = () => {
               </div>
             ))}
           </div>
-        )}
+        </section>
 
         {/* Certifications Section */}
-        {activeSection === "certifications" && (
+        <section
+          id="certifications"
+          data-section-id="certifications"
+          ref={(node) => (sectionRefs.current.certifications = node)}
+          className="scroll-mt-28"
+        >
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
               <Award className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400" />
-              Certifications
+              {t.certificationsTitle}
             </h3>
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
               {data.certifications.map((cert, idx) => (
@@ -512,20 +854,25 @@ const Portfolio: React.FC = () => {
               ))}
             </div>
           </div>
-        )}
+        </section>
 
         {/* Articles Section */}
-        {activeSection === "articles" && (
+        <section
+          id="articles"
+          data-section-id="articles"
+          ref={(node) => (sectionRefs.current.articles = node)}
+          className="scroll-mt-28"
+        >
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
               <BookOpen className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400" />
-              Articles & Blog
+              {t.articlesTitle}
             </h3>
 
             {/* Featured Articles */}
             <div className="space-y-4 mb-6 sm:mb-8">
               <h4 className="text-lg sm:text-xl font-semibold text-purple-300">
-                Articles en vedette
+                {t.featuredLabel}
               </h4>
               {data.articles
                 .filter((article) => article.featured)
@@ -580,7 +927,7 @@ const Portfolio: React.FC = () => {
             {/* All Articles */}
             <div className="space-y-4">
               <h4 className="text-lg sm:text-xl font-semibold text-purple-300">
-                Tous les articles
+                {t.allArticlesLabel}
               </h4>
               <div className="grid sm:grid-cols-2 gap-4">
                 {data.articles.map((article, idx) => (
@@ -630,14 +977,14 @@ const Portfolio: React.FC = () => {
               </div>
             </div>
           </div>
-        )}
+        </section>
       </main>
 
       {/* Footer */}
       <footer className="fixed bottom-0 w-full bg-slate-900/80 backdrop-blur-lg border-t border-white/10 py-4 sm:py-8 z-40">
         <div className="container mx-auto px-4 sm:px-6 text-center text-gray-400">
           <p className="text-xs sm:text-sm">
-            © 2024 {data.personal.name}. Tous droits réservés.
+            © 2024 {data.personal.name}. {t.footer}
           </p>
         </div>
       </footer>
