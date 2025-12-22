@@ -5,12 +5,7 @@ const config = {
     [
       "@semantic-release/git",
       {
-        assets: [
-          "package.json",
-          "package-lock.json",
-          "dist/*.js",
-          "dist/*.js.map",
-        ],
+        assets: ["package.json", "package-lock.json"],
         message:
           "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
       },
