@@ -1,14 +1,16 @@
-const { plugin } = require("postcss");
-
 const config = {
-  branches: ["develop"],
   plugins: [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     [
       "@semantic-release/git",
       {
-        assets: ["dist/*.js", "dist/*.js.map"],
+        assets: [
+          "package.json",
+          "package-lock.json",
+          "dist/*.js",
+          "dist/*.js.map",
+        ],
         message:
           "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
       },

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Github,
   Linkedin,
-  Mail,
   ExternalLink,
   Award,
   Briefcase,
@@ -18,6 +17,7 @@ import {
 } from "lucide-react";
 
 import portfolioDataJson from "./portfolio.json";
+import translations from "./message.json";
 
 // Types TypeScript
 interface PersonalInfo {
@@ -104,153 +104,7 @@ type SectionId =
 
 type Locale = "en" | "fr" | "de";
 
-type Translation = {
-  nav: Record<SectionId, string>;
-  about: { title: string; email: string; phone: string; location: string };
-  experienceTitle: string;
-  projectsTitle: string;
-  skillsTitle: string;
-  educationTitle: string;
-  certificationsTitle: string;
-  articlesTitle: string;
-  featuredLabel: string;
-  allArticlesLabel: string;
-  footer: string;
-  presentLabel: string;
-  months: string[];
-  localeDate: string;
-};
-
 type PortfolioDataByLocale = Record<Locale, PortfolioData>;
-
-const translations: Record<Locale, Translation> = {
-  en: {
-    nav: {
-      about: "About",
-      experience: "Experience",
-      projects: "Projects",
-      skills: "Skills",
-      education: "Education",
-      certifications: "Certifications",
-      articles: "Articles",
-    },
-    about: {
-      title: "About",
-      email: "Email",
-      phone: "Phone",
-      location: "Location",
-    },
-    experienceTitle: "Professional Experience",
-    projectsTitle: "Projects",
-    skillsTitle: "Skills",
-    educationTitle: "Education",
-    certificationsTitle: "Certifications",
-    articlesTitle: "Articles & Blog",
-    featuredLabel: "Featured Articles",
-    allArticlesLabel: "All articles",
-    footer: "All rights reserved.",
-    presentLabel: "Present",
-    months: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    localeDate: "en-US",
-  },
-  fr: {
-    nav: {
-      about: "À propos",
-      experience: "Expérience",
-      projects: "Projets",
-      skills: "Compétences",
-      education: "Formation",
-      certifications: "Certifications",
-      articles: "Articles",
-    },
-    about: {
-      title: "À propos",
-      email: "Email",
-      phone: "Téléphone",
-      location: "Localisation",
-    },
-    experienceTitle: "Expérience Professionnelle",
-    projectsTitle: "Projets",
-    skillsTitle: "Compétences",
-    educationTitle: "Formation",
-    certificationsTitle: "Certifications",
-    articlesTitle: "Articles & Blog",
-    featuredLabel: "Articles en vedette",
-    allArticlesLabel: "Tous les articles",
-    footer: "Tous droits réservés.",
-    presentLabel: "Présent",
-    months: [
-      "Jan",
-      "Fév",
-      "Mar",
-      "Avr",
-      "Mai",
-      "Juin",
-      "Juil",
-      "Août",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Déc",
-    ],
-    localeDate: "fr-FR",
-  },
-  de: {
-    nav: {
-      about: "Über mich",
-      experience: "Berufserfahrung",
-      projects: "Projekte",
-      skills: "Kompetenzen",
-      education: "Ausbildung",
-      certifications: "Zertifizierungen",
-      articles: "Artikel",
-    },
-    about: {
-      title: "Über mich",
-      email: "E-Mail",
-      phone: "Telefon",
-      location: "Standort",
-    },
-    experienceTitle: "Berufserfahrung",
-    projectsTitle: "Projekte",
-    skillsTitle: "Kompetenzen",
-    educationTitle: "Ausbildung",
-    certificationsTitle: "Zertifizierungen",
-    articlesTitle: "Artikel & Blog",
-    featuredLabel: "Ausgewählte Artikel",
-    allArticlesLabel: "Alle Artikel",
-    footer: "Alle Rechte vorbehalten.",
-    presentLabel: "Aktuell",
-    months: [
-      "Jan",
-      "Feb",
-      "Mär",
-      "Apr",
-      "Mai",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Okt",
-      "Nov",
-      "Dez",
-    ],
-    localeDate: "de-DE",
-  },
-};
 
 const LOCALES: Locale[] = ["en", "fr", "de"];
 
@@ -278,8 +132,32 @@ const Portfolio: React.FC = () => {
   });
   const localeDesktopRef = useRef<HTMLDivElement | null>(null);
   const localeMobileRef = useRef<HTMLDivElement | null>(null);
+
+  const getTranslation = (locale: Locale) => {
+    const en = (translations as any).en;
+    const current = (translations as any)[locale] || en;
+    // Deep proxy to fallback to English for missing keys
+    function fallbackProxy(obj: any, enObj: any): any {
+      return new Proxy(obj, {
+        get(target, prop) {
+          if (typeof target[prop] === "object" && target[prop] !== null) {
+            return fallbackProxy(target[prop], enObj ? enObj[prop] : undefined);
+          }
+          if (prop in target) {
+            return target[prop];
+          }
+          if (enObj && prop in enObj) {
+            return enObj[prop];
+          }
+          return `???${String(prop)}???`;
+        },
+      });
+    }
+    return fallbackProxy(current, en);
+  };
+
   const data = portfolioDataByLocale[locale] ?? portfolioDataByLocale.en;
-  const t = translations[locale];
+  const t = getTranslation(locale);
 
   const scrollToSection = (sectionId: SectionId) => {
     setActiveSection(sectionId);

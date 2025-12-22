@@ -1,7 +1,7 @@
 {
   "name": "portfolio-typescript",
   "version": "1.0.0",
-  "type": "module",
+
   "homepage": "https://faboulaye.github.io/portfolio/",
   "scripts": {
     "dev": "vite",
