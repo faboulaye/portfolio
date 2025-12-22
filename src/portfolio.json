@@ -1,0 +1,431 @@
+{
+  "en": {
+    "personal": {
+      "name": "Jean Dupont",
+      "title": "Full Stack Developer",
+      "email": "jean.dupont@example.com",
+      "phone": "+33 6 12 34 56 78",
+      "location": "Paris, France",
+      "summary": "Passionate developer with 5 years of experience building modern and high-performance web applications. Expertise in React, Node.js, and cloud architecture.",
+      "links": {
+        "github": "https://github.com/jeandupont",
+        "linkedin": "https://linkedin.com/in/jeandupont",
+        "portfolio": "https://jeandupont.dev"
+      }
+    },
+    "skills": [
+      {
+        "category": "Frontend",
+        "items": ["React", "TypeScript", "Tailwind CSS", "Next.js"]
+      },
+      {
+        "category": "Backend",
+        "items": ["Node.js", "Python", "PostgreSQL", "MongoDB"]
+      },
+      {
+        "category": "DevOps",
+        "items": ["Docker", "AWS", "CI/CD", "Kubernetes"]
+      },
+      {
+        "category": "Tools",
+        "items": ["Git", "Figma", "Jira", "VS Code"]
+      }
+    ],
+    "experience": [
+      {
+        "company": "Tech Corp",
+        "position": "Senior Developer",
+        "location": "Paris, France",
+        "startDate": "2021-01",
+        "endDate": "Present",
+        "description": "Developing innovative web solutions for international clients.",
+        "achievements": [
+          "Migrated a monolith to a microservices architecture",
+          "Cut load times by 60% through performance optimizations",
+          "Mentored 3 junior developers"
+        ]
+      },
+      {
+        "company": "StartUp Innovation",
+        "position": "Full Stack Developer",
+        "location": "Lyon, France",
+        "startDate": "2019-06",
+        "endDate": "2020-12",
+        "description": "Built web applications from scratch in an agile environment.",
+        "achievements": [
+          "Built a SaaS platform end to end",
+          "Set up automated testing (90% coverage)"
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "E-Commerce Platform",
+        "description": "Full e-commerce platform with online payments and inventory management",
+        "technologies": ["React", "Node.js", "Stripe", "MongoDB"],
+        "link": "https://github.com/exemple/ecommerce",
+        "highlights": ["10k+ active users", "99.9% uptime"]
+      },
+      {
+        "name": "Task Manager Pro",
+        "description": "Real-time collaborative task management app",
+        "technologies": ["Next.js", "Socket.io", "PostgreSQL", "Redis"],
+        "link": "https://github.com/exemple/taskmanager",
+        "highlights": ["Real-time collaboration", "Mobile-first design"]
+      }
+    ],
+    "certifications": [
+      {
+        "name": "AWS Certified Solutions Architect",
+        "issuer": "Amazon Web Services",
+        "date": "2023-05",
+        "credentialId": "AWS-12345"
+      },
+      {
+        "name": "Professional Scrum Master I",
+        "issuer": "Scrum.org",
+        "date": "2022-11",
+        "credentialId": "PSM-67890"
+      }
+    ],
+    "education": [
+      {
+        "degree": "Master in Computer Science",
+        "institution": "Université Paris-Saclay",
+        "location": "Paris, France",
+        "startDate": "2016-09",
+        "endDate": "2018-06",
+        "description": "Specialization in web development and artificial intelligence"
+      },
+      {
+        "degree": "Bachelor in Computer Science",
+        "institution": "Université Lyon 1",
+        "location": "Lyon, France",
+        "startDate": "2013-09",
+        "endDate": "2016-06"
+      }
+    ],
+    "articles": [
+      {
+        "title": "Introduction to TypeScript for React Developers",
+        "excerpt": "Discover how TypeScript can improve your React workflow with strong static typing and a better developer experience.",
+        "date": "2024-03-15",
+        "readTime": "8 min",
+        "tags": ["TypeScript", "React", "Frontend"],
+        "link": "https://medium.com/@jeandupont/typescript-react-intro",
+        "featured": true
+      },
+      {
+        "title": "Microservices Architecture with Node.js",
+        "excerpt": "A complete guide to designing and implementing scalable microservices with Node.js, Docker, and Kubernetes.",
+        "date": "2024-02-20",
+        "readTime": "12 min",
+        "tags": ["Node.js", "Microservices", "DevOps"],
+        "link": "https://medium.com/@jeandupont/microservices-nodejs",
+        "featured": true
+      },
+      {
+        "title": "Web Performance Optimization",
+        "excerpt": "Advanced techniques to improve web app performance: lazy loading, code splitting, and strategic caching.",
+        "date": "2024-01-10",
+        "readTime": "10 min",
+        "tags": ["Performance", "Web", "Optimization"],
+        "link": "https://medium.com/@jeandupont/web-performance"
+      },
+      {
+        "title": "Automated Testing with Jest and React Testing Library",
+        "excerpt": "Learn to write robust, maintainable tests for your React components with best practices.",
+        "date": "2023-12-05",
+        "readTime": "15 min",
+        "tags": ["Testing", "Jest", "React"],
+        "link": "https://medium.com/@jeandupont/testing-react"
+      }
+    ]
+  },
+  "fr": {
+    "personal": {
+      "name": "Jean Dupont",
+      "title": "Développeur Full Stack",
+      "email": "jean.dupont@example.com",
+      "phone": "+33 6 12 34 56 78",
+      "location": "Paris, France",
+      "summary": "Développeur passionné avec 5 ans d'expérience dans la création d'applications web modernes et performantes. Expertise en React, Node.js et architecture cloud.",
+      "links": {
+        "github": "https://github.com/jeandupont",
+        "linkedin": "https://linkedin.com/in/jeandupont",
+        "portfolio": "https://jeandupont.dev"
+      }
+    },
+    "skills": [
+      {
+        "category": "Frontend",
+        "items": ["React", "TypeScript", "Tailwind CSS", "Next.js"]
+      },
+      {
+        "category": "Backend",
+        "items": ["Node.js", "Python", "PostgreSQL", "MongoDB"]
+      },
+      {
+        "category": "DevOps",
+        "items": ["Docker", "AWS", "CI/CD", "Kubernetes"]
+      },
+      {
+        "category": "Outils",
+        "items": ["Git", "Figma", "Jira", "VS Code"]
+      }
+    ],
+    "experience": [
+      {
+        "company": "Tech Corp",
+        "position": "Senior Developer",
+        "location": "Paris, France",
+        "startDate": "2021-01",
+        "endDate": "Present",
+        "description": "Développement de solutions web innovantes pour des clients internationaux.",
+        "achievements": [
+          "Migration d'une application monolithique vers une architecture microservices",
+          "Réduction du temps de chargement de 60% grâce à l'optimisation",
+          "Mentorat de 3 développeurs juniors"
+        ]
+      },
+      {
+        "company": "StartUp Innovation",
+        "position": "Full Stack Developer",
+        "location": "Lyon, France",
+        "startDate": "2019-06",
+        "endDate": "2020-12",
+        "description": "Création d'applications web from scratch en environnement agile.",
+        "achievements": [
+          "Développement d'une plateforme SaaS de A à Z",
+          "Mise en place de tests automatisés (90% de couverture)"
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "E-Commerce Platform",
+        "description": "Plateforme e-commerce complète avec paiement en ligne et gestion d'inventaire",
+        "technologies": ["React", "Node.js", "Stripe", "MongoDB"],
+        "link": "https://github.com/exemple/ecommerce",
+        "highlights": ["10k+ utilisateurs actifs", "99.9% uptime"]
+      },
+      {
+        "name": "Task Manager Pro",
+        "description": "Application de gestion de tâches collaborative en temps réel",
+        "technologies": ["Next.js", "Socket.io", "PostgreSQL", "Redis"],
+        "link": "https://github.com/exemple/taskmanager",
+        "highlights": ["Real-time collaboration", "Mobile-first design"]
+      }
+    ],
+    "certifications": [
+      {
+        "name": "AWS Certified Solutions Architect",
+        "issuer": "Amazon Web Services",
+        "date": "2023-05",
+        "credentialId": "AWS-12345"
+      },
+      {
+        "name": "Professional Scrum Master I",
+        "issuer": "Scrum.org",
+        "date": "2022-11",
+        "credentialId": "PSM-67890"
+      }
+    ],
+    "education": [
+      {
+        "degree": "Master en Informatique",
+        "institution": "Université Paris-Saclay",
+        "location": "Paris, France",
+        "startDate": "2016-09",
+        "endDate": "2018-06",
+        "description": "Spécialisation en développement web et intelligence artificielle"
+      },
+      {
+        "degree": "Licence en Informatique",
+        "institution": "Université Lyon 1",
+        "location": "Lyon, France",
+        "startDate": "2013-09",
+        "endDate": "2016-06"
+      }
+    ],
+    "articles": [
+      {
+        "title": "Introduction à TypeScript pour les développeurs React",
+        "excerpt": "Découvrez comment TypeScript peut améliorer votre workflow React avec un typage statique puissant et une meilleure expérience de développement.",
+        "date": "2024-03-15",
+        "readTime": "8 min",
+        "tags": ["TypeScript", "React", "Frontend"],
+        "link": "https://medium.com/@jeandupont/typescript-react-intro",
+        "featured": true
+      },
+      {
+        "title": "Architecture microservices avec Node.js",
+        "excerpt": "Guide complet pour concevoir et implémenter une architecture microservices scalable avec Node.js, Docker et Kubernetes.",
+        "date": "2024-02-20",
+        "readTime": "12 min",
+        "tags": ["Node.js", "Microservices", "DevOps"],
+        "link": "https://medium.com/@jeandupont/microservices-nodejs",
+        "featured": true
+      },
+      {
+        "title": "Optimisation des performances web",
+        "excerpt": "Techniques avancées pour améliorer les performances de vos applications web : lazy loading, code splitting, et caching stratégique.",
+        "date": "2024-01-10",
+        "readTime": "10 min",
+        "tags": ["Performance", "Web", "Optimisation"],
+        "link": "https://medium.com/@jeandupont/web-performance"
+      },
+      {
+        "title": "Tests automatisés avec Jest et React Testing Library",
+        "excerpt": "Apprenez à écrire des tests robustes et maintenables pour vos composants React avec les meilleures pratiques.",
+        "date": "2023-12-05",
+        "readTime": "15 min",
+        "tags": ["Testing", "Jest", "React"],
+        "link": "https://medium.com/@jeandupont/testing-react"
+      }
+    ]
+  },
+  "de": {
+    "personal": {
+      "name": "Jean Dupont",
+      "title": "Full Stack Developer",
+      "email": "jean.dupont@example.com",
+      "phone": "+33 6 12 34 56 78",
+      "location": "Paris, France",
+      "summary": "Leidenschaftlicher Entwickler mit 5 Jahren Erfahrung in der Entwicklung moderner und leistungsfähiger Webanwendungen. Expertise in React, Node.js und Cloud-Architektur.",
+      "links": {
+        "github": "https://github.com/jeandupont",
+        "linkedin": "https://linkedin.com/in/jeandupont",
+        "portfolio": "https://jeandupont.dev"
+      }
+    },
+    "skills": [
+      {
+        "category": "Frontend",
+        "items": ["React", "TypeScript", "Tailwind CSS", "Next.js"]
+      },
+      {
+        "category": "Backend",
+        "items": ["Node.js", "Python", "PostgreSQL", "MongoDB"]
+      },
+      {
+        "category": "DevOps",
+        "items": ["Docker", "AWS", "CI/CD", "Kubernetes"]
+      },
+      {
+        "category": "Tools",
+        "items": ["Git", "Figma", "Jira", "VS Code"]
+      }
+    ],
+    "experience": [
+      {
+        "company": "Tech Corp",
+        "position": "Senior Developer",
+        "location": "Paris, France",
+        "startDate": "2021-01",
+        "endDate": "Present",
+        "description": "Entwicklung innovativer Weblösungen für internationale Kunden.",
+        "achievements": [
+          "Migration von einem Monolithen zu einer Microservices-Architektur",
+          "Reduzierung der Ladezeiten um 60% durch Optimierungen",
+          "Mentoring von 3 Junior-Entwicklern"
+        ]
+      },
+      {
+        "company": "StartUp Innovation",
+        "position": "Full Stack Developer",
+        "location": "Lyon, France",
+        "startDate": "2019-06",
+        "endDate": "2020-12",
+        "description": "Aufbau von Webanwendungen von Grund auf in einer agilen Umgebung.",
+        "achievements": [
+          "Entwicklung einer SaaS-Plattform von A bis Z",
+          "Einrichtung von automatisierten Tests (90% Abdeckung)"
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "E-Commerce Platform",
+        "description": "Umfassende E-Commerce-Plattform mit Online-Zahlungen und Bestandsverwaltung",
+        "technologies": ["React", "Node.js", "Stripe", "MongoDB"],
+        "link": "https://github.com/exemple/ecommerce",
+        "highlights": ["10k+ aktive Nutzer", "99.9% Uptime"]
+      },
+      {
+        "name": "Task Manager Pro",
+        "description": "Echtzeit-Kollaboration für Aufgabenmanagement",
+        "technologies": ["Next.js", "Socket.io", "PostgreSQL", "Redis"],
+        "link": "https://github.com/exemple/taskmanager",
+        "highlights": ["Echtzeit-Kollaboration", "Mobile-first Design"]
+      }
+    ],
+    "certifications": [
+      {
+        "name": "AWS Certified Solutions Architect",
+        "issuer": "Amazon Web Services",
+        "date": "2023-05",
+        "credentialId": "AWS-12345"
+      },
+      {
+        "name": "Professional Scrum Master I",
+        "issuer": "Scrum.org",
+        "date": "2022-11",
+        "credentialId": "PSM-67890"
+      }
+    ],
+    "education": [
+      {
+        "degree": "Master in Informatik",
+        "institution": "Université Paris-Saclay",
+        "location": "Paris, France",
+        "startDate": "2016-09",
+        "endDate": "2018-06",
+        "description": "Schwerpunkt auf Webentwicklung und künstlicher Intelligenz"
+      },
+      {
+        "degree": "Bachelor in Informatik",
+        "institution": "Université Lyon 1",
+        "location": "Lyon, France",
+        "startDate": "2013-09",
+        "endDate": "2016-06"
+      }
+    ],
+    "articles": [
+      {
+        "title": "Einführung in TypeScript für React-Entwickler",
+        "excerpt": "Entdecke, wie TypeScript deinen React-Workflow mit starkem statischem Typing und besserer Developer Experience verbessert.",
+        "date": "2024-03-15",
+        "readTime": "8 min",
+        "tags": ["TypeScript", "React", "Frontend"],
+        "link": "https://medium.com/@jeandupont/typescript-react-intro",
+        "featured": true
+      },
+      {
+        "title": "Microservices-Architektur mit Node.js",
+        "excerpt": "Umfassender Leitfaden zur Gestaltung und Implementierung skalierbarer Microservices mit Node.js, Docker und Kubernetes.",
+        "date": "2024-02-20",
+        "readTime": "12 min",
+        "tags": ["Node.js", "Microservices", "DevOps"],
+        "link": "https://medium.com/@jeandupont/microservices-nodejs",
+        "featured": true
+      },
+      {
+        "title": "Optimierung der Web-Performance",
+        "excerpt": "Fortgeschrittene Techniken zur Verbesserung der Web-Performance: Lazy Loading, Code Splitting und strategisches Caching.",
+        "date": "2024-01-10",
+        "readTime": "10 min",
+        "tags": ["Performance", "Web", "Optimierung"],
+        "link": "https://medium.com/@jeandupont/web-performance"
+      },
+      {
+        "title": "Automatisiertes Testen mit Jest und React Testing Library",
+        "excerpt": "Lerne, robuste und wartbare Tests für deine React-Komponenten mit Best Practices zu schreiben.",
+        "date": "2023-12-05",
+        "readTime": "15 min",
+        "tags": ["Testing", "Jest", "React"],
+        "link": "https://medium.com/@jeandupont/testing-react"
+      }
+    ]
+  }
+}

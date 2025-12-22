@@ -1,0 +1,128 @@
+{
+  "en": {
+    "nav": {
+      "about": "About",
+      "experience": "Experience",
+      "projects": "Projects",
+      "skills": "Skills",
+      "education": "Education",
+      "certifications": "Certifications",
+      "articles": "Articles"
+    },
+    "about": {
+      "title": "About",
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location"
+    },
+    "experienceTitle": "Professional Experience",
+    "projectsTitle": "Projects",
+    "skillsTitle": "Skills",
+    "educationTitle": "Education",
+    "certificationsTitle": "Certifications",
+    "articlesTitle": "Articles & Blog",
+    "featuredLabel": "Featured Articles",
+    "allArticlesLabel": "All articles",
+    "footer": "All rights reserved.",
+    "presentLabel": "Present",
+    "months": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    "localeDate": "en-US"
+  },
+  "fr": {
+    "nav": {
+      "about": "À propos",
+      "experience": "Expérience",
+      "projects": "Projets",
+      "skills": "Compétences",
+      "education": "Formation",
+      "certifications": "Certifications",
+      "articles": "Articles"
+    },
+    "about": {
+      "title": "À propos",
+      "email": "Email",
+      "phone": "Téléphone",
+      "location": "Localisation"
+    },
+    "experienceTitle": "Expérience Professionnelle",
+    "projectsTitle": "Projets",
+    "skillsTitle": "Compétences",
+    "educationTitle": "Formation",
+    "certificationsTitle": "Certifications",
+    "articlesTitle": "Articles & Blog",
+    "featuredLabel": "Articles en vedette",
+    "allArticlesLabel": "Tous les articles",
+    "footer": "Tous droits réservés.",
+    "presentLabel": "Présent",
+    "months": [
+      "Jan",
+      "Fév",
+      "Mar",
+      "Avr",
+      "Mai",
+      "Juin",
+      "Juil",
+      "Août",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Déc"
+    ],
+    "localeDate": "fr-FR"
+  },
+  "de": {
+    "nav": {
+      "about": "Über mich",
+      "experience": "Berufserfahrung",
+      "projects": "Projekte",
+      "skills": "Kompetenzen",
+      "education": "Ausbildung",
+      "certifications": "Zertifizierungen",
+      "articles": "Artikel"
+    },
+    "about": {
+      "title": "Über mich",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "location": "Standort"
+    },
+    "experienceTitle": "Berufserfahrung",
+    "projectsTitle": "Projekte",
+    "skillsTitle": "Kompetenzen",
+    "educationTitle": "Ausbildung",
+    "certificationsTitle": "Zertifizierungen",
+    "articlesTitle": "Artikel & Blog",
+    "featuredLabel": "Ausgewählte Artikel",
+    "allArticlesLabel": "Alle Artikel",
+    "footer": "Alle Rechte vorbehalten.",
+    "presentLabel": "Aktuell",
+    "months": [
+      "Jan",
+      "Feb",
+      "Mär",
+      "Apr",
+      "Mai",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Okt",
+      "Nov",
+      "Dez"
+    ],
+    "localeDate": "de-DE"
+  }
+}
